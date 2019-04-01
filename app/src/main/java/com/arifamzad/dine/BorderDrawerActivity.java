@@ -160,7 +160,7 @@ public class BorderDrawerActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.border_drawer, menu);
         return true;
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -175,7 +175,7 @@ public class BorderDrawerActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -217,7 +217,24 @@ public class BorderDrawerActivity extends AppCompatActivity
         else if(id == R.id.nav_meal_off){
             fragmentClass = MealOffFragment.class;
         }
-        else if (id == R.id.nav_share) {
+        else if(id == R.id.nav_share){
+
+
+            /*ApplicationInfo api = getApplicationContext().getApplicationInfo();
+            String apkPath = api.sourceDir;
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("application/vnd.android.package-archive");
+
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(apkPath)));
+            startActivity(Intent.createChooser(intent, "Share via"));
+
+            */
+
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT, "Download 'Dine' app from my Google Drive. linke is here: https://drive.google.com/open?id=1GFoIne8e1907d-MVeEguKHht1EVchGV6");
+            startActivity(Intent.createChooser(i,"Share Dine app Via"));
 
         }
 

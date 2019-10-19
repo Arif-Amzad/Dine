@@ -120,6 +120,7 @@ public class DashboardFragment extends Fragment {
                 layoutDine.setVisibility(View.INVISIBLE);
                 //layoutDine.setVisibility(View.INVISIBLE);
 
+
             }
         });
 
@@ -291,20 +292,11 @@ public class DashboardFragment extends Fragment {
                     Toast.makeText(getActivity(), "You are already connected with "+dineName, Toast.LENGTH_LONG).show();
                 }
                 else{
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    String phone = dataSnapshot.child("phone").getValue().toString();
-
-                    DatabaseReference newRef = managerDatabase.child("manager").child(uidd).child("request").child(currentBorderId);
-
-                    newRef.child("name").setValue(name);
-                    newRef.child("phone").setValue(phone);
-                    newRef.child("uid").setValue(currentBorderId);
-
 
                     AlertDialog.Builder alertDialogBuilder = new  AlertDialog.Builder(getActivity());
                     alertDialogBuilder.setTitle("Request sent");
                     alertDialogBuilder.setMessage("");
-                    alertDialogBuilder.setIcon(R.drawable.complete_cursor);
+                    alertDialogBuilder.setIcon(R.drawable.complete_24dp);
 
                     final AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
@@ -316,6 +308,16 @@ public class DashboardFragment extends Fragment {
                             t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
                         }
                     }, 3000);
+
+                    String name = dataSnapshot.child("name").getValue().toString();
+                    String phone = dataSnapshot.child("phone").getValue().toString();
+
+                    DatabaseReference newRef = managerDatabase.child("manager").child(uidd).child("request").child(currentBorderId);
+
+                    newRef.child("name").setValue(name);
+                    newRef.child("phone").setValue(phone);
+                    newRef.child("uid").setValue(currentBorderId);
+
                 }
             }
 

@@ -131,11 +131,13 @@ public class ManagerLoginActivity extends AppCompatActivity {
                     mFirestore.collection("users").document(user_id).update(tokenMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Intent lintent= new Intent(ManagerLoginActivity.this, ManagerActivity.class);
-                            startActivity(lintent);
-                            finish();
+
                         }
                     });
+
+                    Intent lintent= new Intent(ManagerLoginActivity.this, ManagerActivity.class);
+                    startActivity(lintent);
+                    finish();
 
                 }
                 else{

@@ -72,9 +72,6 @@ public class BorderLoginActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         managerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,12 +146,14 @@ public class BorderLoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
 
-                                    Intent lintent= new Intent(BorderLoginActivity.this, BorderDrawerActivity.class);
-                                    startActivity(lintent);
-                                    finish();
+
 
                                 }
                             });
+
+                    Intent lintent= new Intent(BorderLoginActivity.this, BorderDrawerActivity.class);
+                    startActivity(lintent);
+                    finish();
 
 
 

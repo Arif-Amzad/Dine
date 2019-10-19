@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/box_background_layer_white"
+    tools:context=".managerfragments.MealPostFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/my_dine_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textIsSelectable="true"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/HighlightGREEN"
+        android:text="My Dine"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:elevation="30dp"
+                android:layout_marginTop="25dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/box_background_layer_white"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/post_box"
+                    android:layout_width="0dp"
+                    android:paddingLeft="15dp"
+                    android:layout_height="match_parent"
+                    android:hint="Post something to borders"
+                    android:layout_weight="2.3"
+                    android:background="#ffff"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+
+                <Button
+                    android:id="@+id/button_post"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".7"
+                    android:background="#ffff"
+                    android:textColor="@color/HighlightGREEN"
+                    android:elevation="30dp"
+                    android:text="Post"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/box_background_layer_white"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:paddingRight="20dp"
+                android:elevation="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                        android:text="Total Border : "
+                        />
+
+                    <TextView
+                        android:id="@+id/total_border"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/HighlightGREEN"
+                        android:textStyle="bold"
+                        android:text="00"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                        android:text="Total Money : "
+
+                        />
+
+                    <TextView
+                        android:id="@+id/total_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/HighlightGREEN"
+                        android:textStyle="bold"
+                        android:text="00"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                        android:text=" taka"
+                        />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/postlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="100dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="40dp"
+                android:elevation="30dp"
+                android:background="@drawable/box_background_layer_white"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:background="#F8F8F8"
+                    android:text="Last notice to borders"
+                    />
+
+                <TextView
+                    android:id="@+id/posting_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/HighlightGREEN"
+                    android:text="manager name"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/posting_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:text="date"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    />
+
+                <TextView
+                    android:id="@+id/post"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="manager post"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:textIsSelectable="true"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

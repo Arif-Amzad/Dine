@@ -1,7 +1,10 @@
 package com.arifamzad.dine.patternManagement;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustomAdapter.ReqViewHolder> {
 
@@ -30,7 +35,7 @@ public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustom
     private Context context;
     private DatabaseReference myBorderDatabase, requestDatabase, myManagerDatabase;
     private FirebaseAuth mAuth;
-    String managerId;
+    String managerId, uid;
     RecyclerView recyclerView;
 
     public BorderReqCustomAdapter(List<BorderReq>bList,Context context){
@@ -50,11 +55,8 @@ public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustom
         requestDatabase = FirebaseDatabase.getInstance().getReference().child("manager").child(managerId).child("request");
         myManagerDatabase = FirebaseDatabase.getInstance().getReference().child("border");
 
-
-
         return new ReqViewHolder(view);
     }
-
     //set taken data from firebase to own layout
     @Override
     public void onBindViewHolder(@NonNull ReqViewHolder reqViewHolder, int position) {
@@ -105,34 +107,40 @@ public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustom
                     BorderReq borderReq = bList.get(getAdapterPosition());
                     String name = borderReq.name;
                     String phone =borderReq.phone;
-                    String uid = borderReq.uid;
+                    uid = borderReq.uid;
 
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-                    SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
-                    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+                    //SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+                    //SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
 
                     final String time = simpleDateFormat.format(calendar.getTime());
                     final int date = Integer.parseInt(dateFormat.format(calendar.getTime()));
-                    final int month = Integer.parseInt(monthFormat.format(calendar.getTime()));
-                    final int year = Integer.parseInt(yearFormat.format(calendar.getTime()));
+                    //final int month = Integer.parseInt(monthFormat.format(calendar.getTime()));
+                    //final int year = Integer.parseInt(yearFormat.format(calendar.getTime()));
 
+                    PendingBorderFragment pbFrag =new PendingBorderFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("border_name",borderReq.name);
+                    bundle.putString("border_phone",borderReq.phone);
+                    bundle.putString("border_uid",borderReq.uid);
+                    pbFrag.setArguments(bundle);
 
                     DatabaseReference newRef = myBorderDatabase.child(uid);
 
-                    int a = 0;
+                    //int a = 0;
 
                     newRef.child("name").setValue(name);
                     newRef.child("phone").setValue(phone);
                     newRef.child("uid").setValue(uid);
+
                     newRef.child("start_from").setValue(time);
                     newRef.child("date").setValue(date);
-                    newRef.child("days_on").setValue(a);
-                    newRef.child("off_varriable").setValue(a);
-                    newRef.child("paid").setValue(a);
+                    newRef.child("days_on").setValue(0);
+                    newRef.child("off_varriable").setValue(0);
+                    newRef.child("paid").setValue(0);
                     newRef.child("status").setValue("ON");
-
 
                     //newRef.child("month").setValue(month);
                     //newRef.child("year").setValue(year);
@@ -140,18 +148,56 @@ public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustom
 
                     myManagerDatabase.child(uid).child("my_manager").setValue(managerId);
 
-                    requestDatabase.child(uid).removeValue();
                     deleteItem(getAdapterPosition());
+                    requestDatabase.child(uid).removeValue();
                     notifyDataSetChanged();
+                    getItemCount();
 
+                    AlertDialog.Builder alertDialogBuilder = new  AlertDialog.Builder(context);
+                    // set Title
+                    alertDialogBuilder.setTitle("Successfully added");
+                    alertDialogBuilder.setIcon(R.drawable.complete_24dp);
+                    //set Message
+                    alertDialogBuilder.setMessage("").setCancelable(false).setPositiveButton("",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id){
+                            // if button is clicked ,then go to into activity
+                            //Intent intent = new Intent(getActivity(), IntroActivity.class);
+                            //startActivity(intent);
+                        }
+                    }).setNegativeButton("", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id ){
+                            // if button is clicked then close the alert box
+
+                            dialog.cancel();
+                        }
+                    });
+                    //create alert dialog
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    //show alert box
+                    alertDialog.show();
+
+                    final Timer t = new Timer();
+                    t.schedule(new TimerTask() {
+                        public void run() {
+                            alertDialog.dismiss(); // when the task active then close the dialog
+                            // t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                        }
+                    }, 3000);
 
                     Toast.makeText(context,"You have accepted "+name,Toast.LENGTH_LONG).show();
-                    getItemCount();
                 }
             });
 
+            declineBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //deleteItem(getAdapterPosition());
+                    //requestDatabase.child(uid).removeValue();
+                    //notifyDataSetChanged();
+                    //getItemCount();
+                }
+            });
             itemView.setOnClickListener(this);
-
         }
 
         //for deleting an item from list
@@ -184,7 +230,6 @@ public class BorderReqCustomAdapter extends RecyclerView.Adapter<BorderReqCustom
         public void onClick(View view) {
 /*
             Intent intent = new Intent(context, DineProfileActivity.class);
-
             intent.putExtra("name", borderReq.name);
             intent.putExtra("phone",borderReq.phone);
             intent.putExtra("uid",borderReq.uid);

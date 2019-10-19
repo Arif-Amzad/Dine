@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/box_background_layer_white"
+    tools:context=".borderfragments.DashboardFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="30dp"
+        android:background="@drawable/box_background_layer_white"
+        android:weightSum="5"
+        >
+
+        <EditText
+            android:id="@+id/box_code"
+            android:paddingLeft="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Search Dine (4 digits Code)"
+            android:outlineSpotShadowColor="#03A9F4"
+            android:shadowColor="#FF5722"
+            android:background="@android:color/transparent"
+            android:textColorHighlight="#03A9F4"
+            android:textColorLink="#03A9F4"
+            android:layout_weight="3.9"
+            android:inputType="number"
+            />
+        <LinearLayout
+            android:id="@+id/click_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.1"
+            android:clickable="true"
+            android:elevation="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_gravity="center"
+                android:background="@drawable/baseline_search_24"
+                android:textColor="#000"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:text="Search"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/dash_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/layout_dine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:elevation="60dp"
+            android:background="@drawable/box_outline"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            android:weightSum="3"
+            >
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dine name"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/location_dine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:paddingLeft="10dp"
+                    android:text="Location"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+
+                <TextView
+                    android:id="@+id/name_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="Manager Name"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+                <TextView
+                    android:id="@+id/phone_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp"
+                    android:textIsSelectable="true"
+                    android:text="Phone"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_req"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shadowRadius="@integer/google_play_services_version"
+                    android:elevation="30dp"
+                    android:text="Send Request"
+                    android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/dash_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:elevation="40dp"
+                android:gravity="center"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/box_background_layer_white"
+                >
+
+                <TextView
+                    android:id="@+id/dash_dine_name"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:textColor="@color/HighlightGREEN"
+                    android:text="Dine Name" />
+
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/empty"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="No Dine connect yet"
+                />
+
+            <LinearLayout
+                android:id="@+id/dash_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:elevation="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/box_background_layer_white"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="0dp"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="Manager       : " />
+
+                        <TextView
+                            android:id="@+id/dash_manager_name"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="name" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="Dining Code : " />
+
+                        <TextView
+                            android:id="@+id/dash_dine_code"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/HighlightGREEN"
+                            android:textStyle="bold"
+                            android:textIsSelectable="true"
+                            android:text="number" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="Location       : " />
+
+                        <TextView
+                            android:id="@+id/dash_place"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="loading" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="Phone            : " />
+
+                        <TextView
+                            android:id="@+id/dash_contact"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:textIsSelectable="true"
+                            android:text="number" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingTop="20dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                                android:layout_height="wrap_content"
+                                android:text="Payment done: " />
+
+                            <TextView
+                                android:id="@+id/dash_payment"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="@color/HighlightGREEN"
+                                android:text="0000" />
+
+                            <TextView
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" taka" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text=" | "
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                                android:text="Meal On: " />
+
+                            <TextView
+                                android:id="@+id/dash_meal_on"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="@color/HighlightGREEN"
+                                android:text="00" />
+                            <TextView
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                                android:text=" days" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="60dp"
+                    android:paddingBottom="10dp"
+                    android:elevation="20dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/box_background_layer_white"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:layout_gravity="center_vertical"
+                            android:background="#F8F8F8"
+                            android:text="Notice"
+                            />
+
+                        <TextView
+                            android:id="@+id/dash_post_manager"
+                            android:paddingBottom="2dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/HighlightGREEN"
+                            android:textStyle="bold"
+                            android:text="manager"/>
+
+                        <TextView
+                            android:id="@+id/dash_post_time"
+                            android:paddingBottom="10dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="time"/>
+
+                        <TextView
+                            android:id="@+id/dash_post"
+                            android:textIsSelectable="true"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+                            android:text="Manager post"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

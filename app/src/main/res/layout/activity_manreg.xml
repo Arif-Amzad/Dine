@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/reg_layout"
+    android:gravity="center"
+    android:background="@color/HighlightGREEN"
+    tools:context=".ManagerRegActivity">
+
+    <LinearLayout
+
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manager"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+            android:textSize="20dp"
+            />
+
+
+        <EditText
+            android:id="@+id/mreg_dinename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Put a name of your dining"
+            />
+
+        <EditText
+            android:id="@+id/mreg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"
+            android:inputType="text"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            />
+
+        <EditText
+            android:id="@+id/mreg_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            />
+
+        <EditText
+            android:id="@+id/mreg_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            />
+        <EditText
+            android:id="@+id/mreg_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Put a EIIN no.(4 digit)"
+            android:inputType="numberDecimal"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            />
+        <EditText
+            android:id="@+id/mreg_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone"
+            android:inputType="number"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            />
+        <EditText
+            android:id="@+id/mreg_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Institute name/Dormitory/Location"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:inputType="text"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/mreg_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/BUTTONTEXTCOLOCHOC"
+            android:textColor="@color/colorPrimary"
+            android:text="Register"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

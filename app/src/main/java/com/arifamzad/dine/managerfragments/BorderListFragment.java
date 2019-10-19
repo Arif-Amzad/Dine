@@ -49,7 +49,8 @@ public class BorderListFragment extends Fragment {
     FirebaseAuth mAuth;
     public String managerId;
 
-    private List<MyBorder> mbList = new ArrayList<>();
+    //private List<MyBorder> mbList = new ArrayList<>();
+    private List<MyBorder> mbList = new ArrayList<MyBorder>();
     private MyBorderAdapter mbAdapter;
 
     public static BorderListFragment newInstance(){
@@ -90,11 +91,11 @@ public class BorderListFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         //borderShow();
 
-        //mbList.clear();
+        mbList.clear();
 
     }
 
@@ -108,7 +109,14 @@ public class BorderListFragment extends Fragment {
                 mbDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+
+
+                        mbList.clear();
+                        borderListRecycle.removeAllViews();
+
                         if(dataSnapshot2.hasChild("my_border")) {
+
+
 
                             for (DataSnapshot postData : dataSnapshot.getChildren()) {
 

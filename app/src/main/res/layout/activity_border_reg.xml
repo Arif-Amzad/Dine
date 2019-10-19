@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/reg_layout"
+    android:gravity="center"
+    android:background="@color/HighlightGREEN"
+    tools:context=".BorderRegActivity">
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Border"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+            android:textSize="20dp"
+            />
+
+
+        <EditText
+            android:id="@+id/breg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"
+            />
+
+        <EditText
+            android:id="@+id/breg_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            />
+
+        <EditText
+            android:id="@+id/breg_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            />
+        <EditText
+            android:id="@+id/breg_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone"
+            android:inputType="number"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/breg_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/BUTTONTEXTCOLOCHOC"
+            android:textColor="@color/colorPrimary"
+            android:text="Register"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

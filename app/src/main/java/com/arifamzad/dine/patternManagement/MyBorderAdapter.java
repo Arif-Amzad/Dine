@@ -3,6 +3,7 @@ package com.arifamzad.dine.patternManagement;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.arifamzad.dine.R;
 import com.arifamzad.dine.managerfragments.BorderListFragment;
 import com.arifamzad.dine.managerfragments.MealPostFragment;
+import com.arifamzad.dine.managerfragments.PendingBorderFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,7 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
     String managerId;
     int newMoney;
     int totalMoneyHaveINT;
+    int i,k=0;
     //private DatabaseReference myBorderDatabase, requestDatabase;
     //private FirebaseAuth mAuth;
 
@@ -96,6 +99,7 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
 
     public class myBorderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+
         TextView textViewName;
         TextView textViewPhone;
         TextView textUid;
@@ -109,6 +113,7 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
         LinearLayout layoutPaid;
         EditText updatePaymentBox;
         Button updatePayment;
+
 
         public myBorderHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,6 +143,7 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
                     String paid = myBorder.paid;
                     String uid = myBorder.uid;
 
+
                     String regexStr = "^[0-9]*$";
                     //
                     String minus = "-";
@@ -150,7 +156,7 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
                     }
                     else if(n.length()!= 0){
 
-                        int i = Integer.parseInt(String.valueOf(n));
+                        i = Integer.parseInt(String.valueOf(n));
                         int j = Integer.parseInt(String.valueOf(paid));
                         int sum = i+j;
 
@@ -159,6 +165,17 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
                         String sumint = String.valueOf(sum);
 
                         myBorder.setPaid(sumint);
+
+                        if(n.matches("")){
+
+                        }
+                        else{
+                            moneyAdd();
+                            updatePaymentBox.setText("");
+                        }
+
+
+
 
 
 
@@ -205,6 +222,9 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
     }
 
     public void moneyAdd(){
+
+        final int[] c = {0};
+
         myBorderDatabase.child(managerId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -216,7 +236,12 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
 
                 DatabaseReference moneyRef = myBorderDatabase.child(managerId);
 
-                moneyRef.child("total_money_have").setValue(sum);
+                if (c[0] ==0){
+                    moneyRef.child("total_money_have").setValue(sum);
+                    c[0]++;
+                }
+
+
             }
 
             @Override
@@ -224,5 +249,10 @@ public class MyBorderAdapter extends RecyclerView.Adapter<MyBorderAdapter.myBord
 
             }
         });
+
+
+
+
     }
+
 }

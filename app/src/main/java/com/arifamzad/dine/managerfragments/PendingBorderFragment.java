@@ -37,7 +37,9 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -48,12 +50,14 @@ public class PendingBorderFragment extends Fragment {
 
     LinearLayout reqView;
     RecyclerView reqList;
-    DatabaseReference reqDatabase;
+    DatabaseReference reqDatabase, requestDatabase, myBorderDatabase, myManagerDatabase;
     FirebaseAuth mAuth;
     public String managerId;
-    public Button acceptBtn;
+    public Button acceptBtn, decline;
+    boolean b;
 
-    private List<BorderReq>list =new ArrayList<>();
+    //private List<BorderReq>list =new ArrayList<>();
+    private List<BorderReq> list = new ArrayList<BorderReq>();
     private BorderReqCustomAdapter reqAdapter;
 
     public static PendingBorderFragment newInstance(){
@@ -78,6 +82,8 @@ public class PendingBorderFragment extends Fragment {
         reqView = view.findViewById(R.id.reqView);
         reqList = view.findViewById(R.id.request_list);
         acceptBtn = view.findViewById(R.id.accept);
+        decline = view.findViewById(R.id.cancel_req);
+
 
         mAuth = FirebaseAuth.getInstance();
         managerId = mAuth.getCurrentUser().getUid();
@@ -85,24 +91,38 @@ public class PendingBorderFragment extends Fragment {
         reqDatabase = FirebaseDatabase.getInstance().getReference().child("manager").child(managerId);
         reqDatabase.keepSynced(true);
 
+        myBorderDatabase = FirebaseDatabase.getInstance().getReference().child("manager").child(managerId).child("my_border");
+        requestDatabase = FirebaseDatabase.getInstance().getReference().child("manager").child(managerId).child("request");
+        myManagerDatabase = FirebaseDatabase.getInstance().getReference().child("border");
+
         reqAdapter = new BorderReqCustomAdapter(list, getActivity());
         reqList.setHasFixedSize(true);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
         //layoutManager.setReverseLayout(true);
         //layoutManager.setStackFromEnd(true);
         reqList.setLayoutManager(layoutManager);
 
+        reqChildExist();
         reqPostShow();
+
+        //int k=0;
+
+        //int moneyGet =getArguments().getInt("money_get");
+
+
 
         return view;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
 
         //reqPostShow();
+        list.clear();
 
     }
 
@@ -113,47 +133,28 @@ public class PendingBorderFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
-                    reqDatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                if(b==true) {
 
-                            if(dataSnapshot2.hasChild("request")) {
+                    for (DataSnapshot postData : dataSnapshot.getChildren()) {
 
-                                for (DataSnapshot postData : dataSnapshot.getChildren()) {
+                        BorderReq borderReq = new BorderReq();
 
-                                    BorderReq borderReq = new BorderReq();
+                        borderReq.setName(postData.child("name").getValue().toString());
+                        borderReq.setPhone(postData.child("phone").getValue().toString());
+                        borderReq.setUid(postData.child("uid").getValue().toString());
 
-                                    borderReq.setName(postData.child("name").getValue().toString());
-                                    borderReq.setPhone(postData.child("phone").getValue().toString());
-                                    borderReq.setUid(postData.child("uid").getValue().toString());
+                        list.add(borderReq);
 
-                                    list.add(borderReq);
+                        reqList.setAdapter(reqAdapter);
 
-                                    reqList.setAdapter(reqAdapter);
+                        reqAdapter.notifyDataSetChanged();
+                        //Log.e("NAME :: ", postData.child("name").getValue().toString());
+                        //Log.e("KEY :: ", postData.getKey().toString());
 
-                                    reqAdapter.notifyDataSetChanged();
-                                    //Log.e("NAME :: ", postData.child("name").getValue().toString());
-                                    //Log.e("KEY :: ", postData.getKey().toString());
-
-                                    //Toast.makeText(getActivity(), "You have "+list.size()+" border requests", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            else{
-                                Toast.makeText(getActivity(), "You have no new border request", Toast.LENGTH_LONG).show();
-                                //toast.setGravity(Gravity.CENTER  | Gravity.START, 90, 0);
-                                //toast.show();
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
+                        //Toast.makeText(getActivity(), "You have "+list.size()+" border requests", Toast.LENGTH_LONG).show();
+                    }
                 }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -206,6 +207,28 @@ public class PendingBorderFragment extends Fragment {
             phonep.setText(uid);
         }
         */
+    }
+
+    public void reqChildExist(){
+        reqDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+
+                if(dataSnapshot2.hasChild("request")) {
+                    b=true;
+                }
+                else{
+                    b=false;
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 

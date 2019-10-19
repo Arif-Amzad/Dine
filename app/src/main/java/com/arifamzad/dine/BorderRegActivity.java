@@ -1,5 +1,6 @@
 package com.arifamzad.dine;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.arifamzad.dine.managerfragments.BorderListFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
@@ -29,9 +32,10 @@ public class BorderRegActivity extends AppCompatActivity {
 
     EditText bregName, bregEmail, bregPassword,bregPhone;
     Button bregButton;
-    private DatabaseReference userDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
+    DatabaseReference userDatabase;
+    FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +48,16 @@ public class BorderRegActivity extends AppCompatActivity {
         bregPassword = findViewById(R.id.breg_pass);
         bregPhone = findViewById(R.id.breg_phone);
 
+        progress= new ProgressDialog(this);
+
         userDatabase = FirebaseDatabase.getInstance().getReference().child("border");
         mAuth=FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+
+        //FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+          //      .setTimestampsInSnapshotsEnabled(true)
+            //    .build();
+        //mFirestore.setFirestoreSettings(settings);
 
         bregButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +70,10 @@ public class BorderRegActivity extends AppCompatActivity {
     }
 
     private void startRegister(){
+
+        progress.setMessage("Registering ...");
+        progress.show();
+
         final String name = bregName.getText().toString().trim();
         final String email = bregEmail.getText().toString().trim();
         final String password = bregPassword.getText().toString().trim();
@@ -78,10 +93,7 @@ public class BorderRegActivity extends AppCompatActivity {
                         current_user_data.child("name").setValue(name);
                         current_user_data.child("phone").setValue(phone);
 
-                        Intent registerintent= new Intent(BorderRegActivity.this, BorderDrawerActivity.class);
-                        registerintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(registerintent);
-                        finish();
+
 
                         String token_id =  FirebaseInstanceId.getInstance().getToken();
 
@@ -93,14 +105,22 @@ public class BorderRegActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
 
+                                Intent registerintent= new Intent(BorderRegActivity.this, BorderDrawerActivity.class);
+                                startActivity(registerintent);
+                                finish();
+                                progress.dismiss();
+                                Toast.makeText(BorderRegActivity.this, "You have registered as a Border", Toast.LENGTH_LONG).show();
 
                             }
                         });
 
 
+
+
                     }
 
                     else{
+                        progress.dismiss();
                         Toast.makeText(BorderRegActivity.this, "You have already registered! Please login", Toast.LENGTH_LONG).show();
 
                     }
@@ -108,7 +128,9 @@ public class BorderRegActivity extends AppCompatActivity {
             });
         }
         else{
+            progress.dismiss();
             Toast.makeText(BorderRegActivity.this, "Fill all value please", Toast.LENGTH_LONG).show();
+
         }
     }
 }

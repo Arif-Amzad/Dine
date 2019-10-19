@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/HighlightGREEN"
+    android:id="@+id/reg_layout"
+    tools:context=".ManagerLoginActivity">
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manager"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+            android:layout_marginBottom="40dp"
+            android:textSize="20dp"
+            />
+
+
+        <EditText
+            android:id="@+id/mlogin_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            />
+
+        <EditText
+            android:id="@+id/mlogin_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/mlogin_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/BUTTONTEXTCOLOCHOC"
+            android:textColor="@color/colorPrimary"
+            android:text="Login"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have Dine yet?"
+            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+            />
+
+        <TextView
+            android:id="@+id/create_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:textColor="@color/BUTTONTEXTCOLOCHOC"
+            android:text="  Create new Dine"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

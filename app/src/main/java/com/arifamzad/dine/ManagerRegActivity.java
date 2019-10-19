@@ -1,5 +1,6 @@
 package com.arifamzad.dine;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -34,10 +35,12 @@ public class ManagerRegActivity extends AppCompatActivity {
 
     EditText regDineName, mRegEmail, mRegPass, mRegName, regCode, mPhone, mPlace;
     Button mregButton;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
-    private DatabaseReference userDatabase, eiinDatabase, postDatabase;
+    FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+    ProgressDialog progress;
+    DatabaseReference userDatabase, eiinDatabase, postDatabase;
     int a;
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class ManagerRegActivity extends AppCompatActivity {
         mPlace = findViewById(R.id.mreg_place);
 
 
+        progress= new ProgressDialog(this);
         userDatabase = FirebaseDatabase.getInstance().getReference().child("manager");
         eiinDatabase = FirebaseDatabase.getInstance().getReference();
         postDatabase = FirebaseDatabase.getInstance().getReference().child("post");
@@ -71,11 +75,15 @@ public class ManagerRegActivity extends AppCompatActivity {
     }
 
     private void startRegister(){
+
+        progress.setMessage("Checking login ...");
+        progress.show();
+
         final String dineName = regDineName.getText().toString().trim();
         final String email = mRegEmail.getText().toString().trim();
         final String password = mRegPass.getText().toString().trim();
         final String name = mRegName.getText().toString().trim();
-        final String code = regCode.getText().toString().trim();
+        code = regCode.getText().toString().trim();
         final String phone = mPhone.getText().toString().trim();
         final String place = mPlace.getText().toString().trim();
 
@@ -83,23 +91,9 @@ public class ManagerRegActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         final String time = simpleDateFormat.format(calendar.getTime());
 
-        eiinDatabase.child("eiin").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        checkEIINexist();
 
-                if(dataSnapshot.hasChild(code)){
-                    a=1;
-                }
-                else{
-                    a=2;
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(dineName) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(place)){
 
             if(a==2){
@@ -130,12 +124,30 @@ public class ManagerRegActivity extends AppCompatActivity {
                              defPostRef.child("post").setValue("");
                              defPostRef.child("post_time").setValue("");
 
-                             Intent registerintent = new Intent(ManagerRegActivity.this, ManagerActivity.class);
-                             registerintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                             startActivity(registerintent);
-                             finish();
+
+
+                             String token_id =  FirebaseInstanceId.getInstance().getToken();
+                             //String user_id = mAuth.getCurrentUser().getUid();
+
+                             Map<String, Object> tokenMap = new HashMap<>();
+                             tokenMap.put("token_id", token_id);
+                             tokenMap.put("manager_name", name);
+
+                             mFirestore.collection("users").document(user_id).set(tokenMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                 @Override
+                                 public void onSuccess(Void aVoid) {
+
+                                     Intent intent = new Intent(ManagerRegActivity.this, ManagerActivity.class);
+                                     startActivity(intent);
+                                     finish();
+                                     progress.dismiss();
+                                     Toast.makeText(ManagerRegActivity.this, "You have registered as a Border", Toast.LENGTH_LONG).show();
+
+                                 }
+                             });
                          }
                          else {
+                             progress.dismiss();
                              Toast.makeText(ManagerRegActivity.this, "You have already registered! Please login", Toast.LENGTH_LONG).show();
 
                          }
@@ -143,26 +155,37 @@ public class ManagerRegActivity extends AppCompatActivity {
                  });
              }
              else{
+                 progress.dismiss();
                  Toast.makeText(ManagerRegActivity.this, "EIIN is already taken! Choose new one", Toast.LENGTH_LONG).show();
              }
         }
         else{
+            progress.dismiss();
             Toast.makeText(ManagerRegActivity.this, "Fill all value please", Toast.LENGTH_LONG).show();
         }
 
-                String token_id =  FirebaseInstanceId.getInstance().getToken();
-                String user_id = mAuth.getCurrentUser().getUid();
 
-                Map<String, Object> tokenMap = new HashMap<>();
-                tokenMap.put("token_id", token_id);
-                tokenMap.put("manager_name", name);
 
-                mFirestore.collection("users").document(user_id).set(tokenMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
+    }
 
-                    }
-                });
+    public void checkEIINexist(){
 
+        eiinDatabase.child("eiin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.hasChild(code)){
+                    a=1;
+                }
+                else{
+                    a=2;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

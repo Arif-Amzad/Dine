@@ -20,6 +20,8 @@ public class NotificationActivity extends AppCompatActivity {
         mNotifData = findViewById(R.id.notif_text);
         mNotifName = findViewById(R.id.notif_manager);
 
+        mNotifName.setTextColor(Color.parseColor("CE552B"));
+
         mNotifName.setText(dataFrom);
         mNotifData.setText(dataMessage);
     }

@@ -89,13 +89,14 @@ public class BorderDrawerActivity extends AppCompatActivity
 
 
         mFirestore = FirebaseFirestore.getInstance();
+/*
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
                 .build();
         mFirestore.setFirestoreSettings(settings);
 
 
-
+*/
         setContentView(R.layout.activity_border_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,6 +122,7 @@ public class BorderDrawerActivity extends AppCompatActivity
         Class fragmentClass = null;
 
         fragmentClass = BorderProfileFragment.class;
+
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -134,13 +136,13 @@ public class BorderDrawerActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.flContent, selectedFragment);
         transaction.commit();
+
+
+        navDataLoad();
     }
 
     public void onStart(){
         super.onStart();
-
-        navDataLoad();
-
 
     }
 
@@ -170,7 +172,8 @@ public class BorderDrawerActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return true;mbList.clear();
+                borderListRecycle.removeAllViews();
         }
 
         return super.onOptionsItemSelected(item);
@@ -203,6 +206,7 @@ public class BorderDrawerActivity extends AppCompatActivity
 
             Map<String, Object> tokenMapRemove = new HashMap<>();
             tokenMapRemove.put("token_id", FieldValue.delete());
+
             mFirestore.collection("users").document(currentId).update(tokenMapRemove).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -278,6 +282,7 @@ public class BorderDrawerActivity extends AppCompatActivity
     }
 
     public void navDataLoad(){
+
         borderDatabase.child("border").child(currentId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         FirebaseApp.initializeApp(this);
         managerDatabase= FirebaseDatabase.getInstance().getReference().child("manager");
@@ -56,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
         borderDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if(currentUser==null){
                     Intent lintent= new Intent(SplashActivity.this, BorderLoginActivity.class);
                     startActivity(lintent);
@@ -70,12 +71,9 @@ public class SplashActivity extends AppCompatActivity {
 
                 }
                 else{
-                    Intent lintent= new Intent(SplashActivity.this, ManagerActivity.class);
-                    startActivity(lintent);
-                    finish();
-
-                    Toast.makeText(SplashActivity.this, "You are logged in as Manager", Toast.LENGTH_SHORT).show();
+                    checkManagerExist();
                 }
+
             }
 
             @Override
@@ -83,7 +81,6 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
     private void checkManagerExist(){

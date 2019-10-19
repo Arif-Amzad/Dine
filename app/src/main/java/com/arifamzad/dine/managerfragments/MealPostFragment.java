@@ -101,18 +101,16 @@ public class MealPostFragment extends Fragment {
             }
         });
 
+        showManagerDashboard();
+        moneyHave();
+        //totalMoney();
 
         return view;
 
-
     }
-
 
     public void onStart() {
         super.onStart();
-
-        showManagerDashboard();
-        totalMoney();
 
     }
 
@@ -169,6 +167,7 @@ public class MealPostFragment extends Fragment {
     }
 
     public void startingPost(){
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MMMM 'at' hh:mm a");
 
@@ -224,7 +223,7 @@ public class MealPostFragment extends Fragment {
             AlertDialog.Builder alertDialogBuilder = new  AlertDialog.Builder(getActivity());
             // set Title
             alertDialogBuilder.setTitle("Successfully posted");
-            alertDialogBuilder.setIcon(R.drawable.complete_cursor);
+            alertDialogBuilder.setIcon(R.drawable.complete_24dp);
             //set Message
             alertDialogBuilder.setMessage("").setCancelable(false).setPositiveButton("",new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id){
@@ -292,6 +291,21 @@ public class MealPostFragment extends Fragment {
             }
         });
 
+    }
+
+    public void moneyHave(){
+        managerDatabase.child("manager").child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String m = dataSnapshot.child("total_money_have").getValue().toString();
+                totalMoney.setText(String.valueOf(m));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /*
